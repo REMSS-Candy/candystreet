@@ -41,3 +41,67 @@ Page with a table to show revenue per days.
 #### /inventory/admin/log
 
 Page intended to show all currently logged actions taken.
+
+---
+
+# Models
+
+SQL models to be used.
+
+## User
+
+| Column Name | Description | Type |
+|        ---: | :---        | :--- |
+| id | Unique ID | int |
+| username | Username used to log in or audit | str(30) |
+| password | Hashed password info | str(?) |
+| type | User Type. 99: Superuser, 0: Admin, 1: Employee | int |
+
+## Item
+
+| Column Name | Description | Type |
+|        ---: | :---        | :--- |
+| id | Unique ID | int |
+| name | Name of the item | str(30) |
+| buy_price | Price when purchased to stock | int |
+| sell_price | Price when sold to customers | int |
+| quantity | Current quantity available in stock | int |
+
+## Sale
+
+Note: Separate Sales log must be created per item in cases where multiple items are sold in a single sale.
+
+| Column Name | Description | Type |
+|        ---: | :---        | :--- |
+| id | Unique ID | int |
+| time | Time the sale was made | datetime |
+| user_id | Seller who made the sale | int |
+| item_id | Item that was sold. | int |
+| parent_entry | Reference to previous entry if multiple sale entries were made | int |
+| quantity | Quantity of the sold item | int |
+
+## Transaction
+
+| Column Name | Description | Type |
+|        ---: | :---        | :--- |
+| id | Unique ID | int |
+| time | Time the transaction was made | int |
+| user_id | User who triggered the transaction | int |
+| sale_id | Sale entry that triggered the transaction, if existing. Null if done manually by admin. | int |
+| amount | Amount of money moved. Could be positive/negative | int |
+
+## Revenue
+
+| Column Name | Description | Type |
+|        ---: | :---        | :--- |
+| id | Unique ID | int |
+| date | the date the data is representing | datetime |
+| revenue | The amount of profit made in a day | int |
+
+## Log
+
+| Column Name | Description | Type |
+|        ---: | :---        | :--- |
+| id | Unique ID | int |
+| time | The time the action was taken | datetime |
+| action | String representing the action taken | text |
