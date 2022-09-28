@@ -106,4 +106,5 @@ Note: Separate Sales log must be created per item in cases where multiple items 
 |        ---: | :---        | :--- |
 | id | Unique ID | int |
 | time | The time the action was taken | datetime |
+| user | User who trigerred the action | int |
 | action | String representing the action taken | text |
