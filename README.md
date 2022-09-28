@@ -2,6 +2,8 @@
 
 CandyStreet Inventory Management Web Project
 
+Copyright (C) 2022 REMSS Candy Project Team
+
 ---
 
 # Routes
