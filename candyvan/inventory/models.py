@@ -7,7 +7,7 @@ class User(AbstractUser):
 
 
 class Item(models.Model):
-    name = models.CharField(30, unique=True)
+    name = models.CharField(max_length=30, unique=True)
     buy_price = models.IntegerField()
     sell_price = models.IntegerField()
     quantity = models.IntegerField(default=0)
