@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.bg-image{
+    background-image: url('https://cdn.shopify.com/s/files/1/0520/4718/4038/products/Martket_Embroider_EagleM_Royal_WebImg_2_800x.jpg?v=1613513986');
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+
+.bg-text{
+    background-color: black;
+    background-color: rgba(0,0,0, 0.4);
+    color: darkblue;
+    font-weight: bold;
+    position: absolute;
+    border: 5px solid darkblue;
+    text-align: center;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 2;
+    padding: 15px;
+    width: 40%;
+}
+
+.button{
+    margin: auto;
+    width: 50%;
+    height: 30px;
+    position: absolute;
+    top: 38%;
+    left: 30%;
+    display: inline-block;
+    color: white;
+    background-color: darkblue;
+    border: 5px solid darkblue;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 10px;
+    text-align: center;
+    opacity: 0.3;
+}
+
+.logbutton{
+    display: table;
+    width: 40%;
+    height: 30px;
+}
+
+.logbutton:hover{
+    background: darkblue;
+    color: fff;
+    opacity: 0.5;
+}
+
+</style>
+</head>
+<body>
+<div class="bg-image"></div>
+<div class="bg-text">
+    <h1 style="font-size: 30px">Candy Street Login</h1>
+    <form action="/action_page.php">
+        <label for="fname">Username:</label>
+        <input type="text" id="fname" name="fname" placeholder="Username"><br>
+        <label for="fname">Password:</label>
+        <input type="password" id="fname" name="fname" placeholder="Password"><br>  
+</div>
+
+<a href="file:///H:/comp%20programming/admin-log.html" class="button logbutton">Log In </a>
+
+</body>
+</html>
