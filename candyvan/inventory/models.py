@@ -1,10 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-
-
-class User(AbstractUser):
-    permission = models.IntegerField(default=99)
-
+from django.contrib.auth.models import User
 
 class Item(models.Model):
     name = models.CharField(max_length=30, unique=True)
