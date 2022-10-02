@@ -24,12 +24,10 @@ function post(data, route=null, method='post') {
         const inputField = document.createElement('input')
         inputField.type = 'hidden'
         inputField.name = key
-        inputField.name = data[key]
+        inputField.value = data[key]
 
         form.appendChild(inputField)
     }
-
-    document.body.appendChild(form)
     form.submit()
 }
 
@@ -122,6 +120,7 @@ function addItemToCart(itemName, quantity) {
     cartUpdateTotal()
 }
 
+
 for (const name in itemData) {
     console.log("Adding " + name)
     data = itemData[name]
@@ -167,13 +166,15 @@ for (const name in itemData) {
     itemList.insertBefore(newNode, exampleItemNode)
 }
 
+exampleItemNode.remove()
+
+
 cartCheckout.addEventListener("click", function() {
     cart = parseCartToObject()
     console.log(cart)
     post(cart)
 })
 
-exampleItemNode.remove()
 
 modal = document.getElementById("modal")
 console.log(modal)
