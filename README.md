@@ -57,7 +57,6 @@ SQL models to be used.
 | id | Unique ID | int |
 | username | Username used to log in or audit | str(30) |
 | password | Hashed password info | str(?) |
-| type | User Type. 99: Superuser, 0: Admin, 1: Employee | int |
 
 ## Item
 
