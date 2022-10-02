@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    {% if user %}
+      You are logged in as: {{ user }}
+    {% endif %}
+    <form method="post">
+      {% csrf_token %}
+      {{ form }}
+      <input type="submit" value="Login">
+    </form>
+  </body>
+</html>
