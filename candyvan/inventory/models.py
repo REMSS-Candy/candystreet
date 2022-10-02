@@ -1,5 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+
+
+class CandyUser(AbstractUser):
+    pass
 
 
 class Item(models.Model):
@@ -14,7 +18,7 @@ class Item(models.Model):
 
 class Sale(models.Model):
     time = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CandyUser, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
@@ -26,7 +30,7 @@ class Sale(models.Model):
 
 class Transaction(models.Model):
     time = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CandyUser, on_delete=models.CASCADE)
     amount = models.IntegerField()
     sale = models.ForeignKey(Sale, on_delete=models.CASCADE, null=True)
 
@@ -47,7 +51,7 @@ class Revenue(models.Model):
 
 class Log(models.Model):
     time = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CandyUser, on_delete=models.CASCADE)
     action = models.TextField()
 
     def __str__(self):
