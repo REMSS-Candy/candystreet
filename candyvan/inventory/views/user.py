@@ -2,11 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate
 
-from .forms import LoginForm
-
-
-def index(request):
-    return HttpResponse("Hello world!")
+from ..forms import LoginForm
 
 
 def login(request):
