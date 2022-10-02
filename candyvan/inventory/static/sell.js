@@ -15,7 +15,7 @@ function round_to(num, decimal) {
 
 function post(data, route=null, method='post') {
     // Creates an invisible form to submit data
-    const form = document.createElement('form')
+    const form = document.getElementById("post_form")
     form.method = method
     if (route !== null)
         form.action = route
@@ -173,3 +173,13 @@ cartCheckout.addEventListener("click", function() {
 })
 
 exampleItemNode.remove()
+
+modal = document.getElementById("modal")
+console.log(modal)
+if (modal !== null) {
+    document.getElementsByName("modal_close").forEach(node => {
+        node.addEventListener("click", function() {
+            modal.classList.remove("is-active")
+        })
+    })
+}

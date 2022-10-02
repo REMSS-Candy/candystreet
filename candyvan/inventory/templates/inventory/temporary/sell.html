@@ -8,7 +8,7 @@
 <body>
   <!-- JSON Data -->
   <div id="item_data" hidden>
-    {"Candy": {"available": 10, "price": 2.99}, "Pizza": {"available": 8, "price": 5.49}}
+    {{ item_data }}
   </div>
   <section class="hero is-fullheight">
     <div class="hero-body">
@@ -87,5 +87,24 @@
       <!-- End of Horizontal row -->
     </div>
   </section>
-  <script src="sell.js"></script>
+  <form id="post_form" hidden>
+    {% csrf_token %}
+  </form>
+  {% if error %}
+    <div id="modal" class="modal is-active">
+      <div name="modal_close" class="modal-background"></div>
+      <div class="modal-content">
+        <article class="message is-danger">
+          <div class="message-header">
+            <p>Error!</p>
+          </div>
+          <div class="message-body">
+            {{ error }}
+          </div>
+        </article>
+      </div>
+      <button name="modal_close" class="modal-close is-large"></button>
+    </div>
+  {% endif %}
+  <script src="/static/sell.js"></script>
 </body>
