@@ -23,7 +23,7 @@ def login(request):
     else:
         form = LoginForm()
 
-    return render(request, 'inventory/login.html',
+    return render(request, 'inventory/temporary/login.html',
                   {'form': form, 'user': request.session.get("user_id")})
 
 
