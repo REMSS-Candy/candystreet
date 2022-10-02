@@ -15,6 +15,9 @@ class Item(models.Model):
     def __str__(self):
         return f"<Item `{self.name}` ({self.id})>"
 
+    def __repr__(self):
+        return self.__str__()
+
 
 class Sale(models.Model):
     time = models.DateTimeField(auto_now_add=True)
@@ -26,6 +29,9 @@ class Sale(models.Model):
     def __str__(self):
         time_str = self.time.strftime('%Y-%m-%d %H:%M:%S')
         return f"<Sale by {self.user.name} at {time_str} ({self.id})>"
+
+    def __repr__(self):
+        return self.__str__()
 
 
 class Transaction(models.Model):
@@ -39,6 +45,9 @@ class Transaction(models.Model):
         return f"<Transaction ${self.amount} by {self.user.name}" \
                f"at {time_str} ({self.id})>"
 
+    def __repr__(self):
+        return self.__str__()
+
 
 class Revenue(models.Model):
     date = models.DateField(auto_now_add=True)
@@ -47,6 +56,9 @@ class Revenue(models.Model):
     def __str__(self):
         date_str = self.date.isoformat()
         return f"<Revenue ${self.revenue} at {date_str} ({self.id})>"
+
+    def __repr__(self):
+        return self.__str__()
 
 
 class Log(models.Model):
@@ -57,3 +69,6 @@ class Log(models.Model):
     def __str__(self):
         time_str = self.time.strftime('%Y-%m-%d %H:%M:%S')
         return f"<Log {self.id} by {self.user.name} at {time_str} ({self.id})>"
+
+    def __repr__(self):
+        return self.__str__()
