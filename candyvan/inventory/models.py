@@ -8,8 +8,8 @@ class CandyUser(AbstractUser):
 
 class Item(models.Model):
     name = models.CharField(max_length=30, unique=True)
-    buy_price = models.IntegerField()
-    sell_price = models.IntegerField()
+    buy_price = models.DecimalField(max_digits=10, decimal_places=2)
+    sell_price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.IntegerField(default=0)
 
     def __str__(self):
@@ -31,7 +31,7 @@ class Sale(models.Model):
 class Transaction(models.Model):
     time = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(CandyUser, on_delete=models.CASCADE)
-    amount = models.IntegerField()
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
     sale = models.ForeignKey(Sale, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
@@ -42,7 +42,7 @@ class Transaction(models.Model):
 
 class Revenue(models.Model):
     date = models.DateField(auto_now_add=True)
-    revenue = models.IntegerField(default=0)
+    revenue = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     def __str__(self):
         date_str = self.date.isoformat()
