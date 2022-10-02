@@ -160,6 +160,7 @@ for (const name in itemData) {
         addNode.addEventListener("click", function(){
             num = parseInt(target.innerText)
             addItemToCart(itemName, num)
+            target.innerText = 1
         })
     })();
 

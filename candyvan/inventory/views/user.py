@@ -5,6 +5,8 @@ from ..forms import LoginForm
 
 
 def login(request):
+    if request.session.get("user_id"):
+        return redirect("sell")
     if request.method == "POST":
         form = LoginForm(request.POST)
 
