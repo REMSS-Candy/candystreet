@@ -52,11 +52,7 @@ SQL models to be used.
 
 ## User
 
-| Column Name | Description | Type |
-|        ---: | :---        | :--- |
-| id | Unique ID | int |
-| username | Username used to log in or audit | str(30) |
-| password | Hashed password info | str(?) |
+Uses the default model provided by Django.
 
 ## Item
 
