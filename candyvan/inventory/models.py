@@ -28,7 +28,7 @@ class Sale(models.Model):
 
     def __str__(self):
         time_str = self.time.strftime('%Y-%m-%d %H:%M:%S')
-        return f"<Sale by {self.user.name} at {time_str} ({self.id})>"
+        return f"<Sale by {self.user.username} at {time_str} ({self.id})>"
 
     def __repr__(self):
         return self.__str__()
@@ -42,7 +42,7 @@ class Transaction(models.Model):
 
     def __str__(self):
         time_str = self.time.strftime('%Y-%m-%d %H:%M:%S')
-        return f"<Transaction ${self.amount} by {self.user.name}" \
+        return f"<Transaction ${self.amount} by {self.user.username}" \
                f"at {time_str} ({self.id})>"
 
     def __repr__(self):
@@ -68,7 +68,8 @@ class Log(models.Model):
 
     def __str__(self):
         time_str = self.time.strftime('%Y-%m-%d %H:%M:%S')
-        return f"<Log {self.id} by {self.user.name} at {time_str} ({self.id})>"
+        return f"<Log {self.id} by {self.user.username} " \
+               f"at {time_str} ({self.id})>"
 
     def __repr__(self):
         return self.__str__()
