@@ -5,7 +5,7 @@ from ..models import CandyUser, Item, Sale, Transaction, Revenue
 import json
 import datetime
 
-
+#sales :)
 def sell_post(request):
     user = CandyUser.objects.get(id=request.session['user_id'])
     print("\n".join(f"{x}: {y}" for x, y in request.POST.items()))
