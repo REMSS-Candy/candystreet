@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+
+<body>
+  <!-- JSON Data -->
+  <div id="item_data" hidden>
+    {{ item_data }}
+  </div>
+  <section class="hero is-fullheight">
+    <div class="hero-body">
+      <!-- Horizontal Row -->
+      <div class="container">
+        <div class="columns">
+          <div class="column">
+            <!-- Items list -->
+            <div id="item_list" class="box" style="overflow:scroll; height: 90vh">
+              <h1 class="title">Items</h1>
+              <hr>
+              <!-- Item entry -->
+              <div id="item_example" name="item_entry" class="box is-hidden">
+                <nav class="level">
+                  <!-- Name -->
+                  <div class="level-left"><div class="level-item">
+                    <p name="item_name">TestItem</p>
+                  </div></div>
+                  <!-- Info -->
+                  <div class="level-right"><div class="level-item">
+                    Available:
+                    <p name="item_available" class="has-text-weight-bold ml-2 mr-2">7</p>
+                    | Price:
+                    <p name="item_price" class="has-text-weight-bold ml-2 mr-4">$12.99</p>
+                    <div name="item_minus" class="button is-info">-</div>
+                    <p name="item_quantity" class="ml-2 mr-2">1</p>
+                    <div name="item_plus" class="button is-warning">+</div>
+                    <div name="item_add" class="button is-primary ml-2">Add</div>
+                  </div></div>
+                </nav>
+              </div>
+              <!-- End of Item entry -->
+            </div>
+            <!-- End of Items list -->
+          </div>
+          <div class="column">
+            <!-- Cart -->
+            <div id="cart_list" class="box" style="overflow:scroll; height: 90vh">
+              <h1 class="title">Cart</h1>
+              <hr>
+              <!-- Cart entry -->
+              <div id="cart_example" name="cart_entry" class="box is-hidden">
+                <nav class="level">
+                  <!-- Name -->
+                  <div class="level-left"><div class="level-item">
+                    <p name="cart_name">TestItem</p>
+                  </div></div>
+                  <!-- Info -->
+                  <div class="level-right"><div class="level-item">
+                    Total:
+                    <p name="cart_total" class="has-text-weight-bold ml-2 mr-4">$12.99</p>
+                    <div name="cart_minus" class="button is-info">-</div>
+                    <p name="cart_quantity" class="ml-2 mr-2">0</p>
+                    <div name="cart_plus" class="button is-warning">+</div>
+                    <div name="cart_remove" class="button is-danger ml-2">Remove</div>
+                  </div></div>
+                </nav>
+              </div>
+              <!-- End of Cart entry -->
+              <hr>
+              <!-- Cart Summary -->
+              <nav class="level">
+                <div class="level-left"></div>
+                <div class="level-right"><div class="level-item">
+                  Total:
+                  <p id="cart_total" class="subtitle has-text-weight-bold ml-2">$0</p>
+                  <div id="cart_checkout" class="button is-primary has-text-weight-semibold ml-4">Checkout</div>
+                </div></div>
+              </nav>
+              <!-- End of Cart Summary -->
+            </div>
+            <!-- End of Cart -->
+          </div>
+        </div>
+      </div>
+      <!-- End of Horizontal row -->
+    </div>
+  </section>
+  <form id="post_form" hidden>
+    {% csrf_token %}
+  </form>
+  {% if error %}
+    <div id="modal" class="modal is-active">
+      <div name="modal_close" class="modal-background"></div>
+      <div class="modal-content">
+        <article class="message is-danger">
+          <div class="message-header">
+            <p>Error!</p>
+          </div>
+          <div class="message-body">
+            {{ error }}
+          </div>
+        </article>
+      </div>
+      <button name="modal_close" class="modal-close is-large"></button>
+    </div>
+  {% endif %}
+  <script src="/static/sell.js"></script>
+</body>

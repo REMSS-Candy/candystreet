@@ -52,12 +52,7 @@ SQL models to be used.
 
 ## User
 
-| Column Name | Description | Type |
-|        ---: | :---        | :--- |
-| id | Unique ID | int |
-| username | Username used to log in or audit | str(30) |
-| password | Hashed password info | str(?) |
-| type | User Type. 99: Superuser, 0: Admin, 1: Employee | int |
+Uses the default model provided by Django.
 
 ## Item
 
@@ -77,10 +72,10 @@ Note: Separate Sales log must be created per item in cases where multiple items 
 |        ---: | :---        | :--- |
 | id | Unique ID | int |
 | time | Time the sale was made | datetime |
-| user_id | Seller who made the sale | int |
-| item_id | Item that was sold. | int |
-| parent_entry | Reference to previous entry if multiple sale entries were made | int |
+| user | Seller who made the sale | int |
+| item | Item that was sold. | int |
 | quantity | Quantity of the sold item | int |
+| parent_entry | Reference to previous entry if multiple sale entries were made | int |
 
 ## Transaction
 
@@ -88,9 +83,9 @@ Note: Separate Sales log must be created per item in cases where multiple items 
 |        ---: | :---        | :--- |
 | id | Unique ID | int |
 | time | Time the transaction was made | int |
-| user_id | User who triggered the transaction | int |
-| sale_id | Sale entry that triggered the transaction, if existing. Null if done manually by admin. | int |
+| user | User who triggered the transaction | int |
 | amount | Amount of money moved. Could be positive/negative | int |
+| sale | Sale entry that triggered the transaction, if existing. Null if done manually by admin. | int |
 
 ## Revenue
 
