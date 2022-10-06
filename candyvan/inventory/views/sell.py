@@ -5,7 +5,8 @@ from ..models import CandyUser, Item, Sale, Transaction, Revenue
 import json
 import datetime
 
-#sales :)
+
+# sales :)
 def sell_post(request):
     user = CandyUser.objects.get(id=request.session['user_id'])
     print("\n".join(f"{x}: {y}" for x, y in request.POST.items()))
@@ -68,8 +69,9 @@ def sell(request):
     if request.method == "POST":
         rtnvalue = sell_post(request)
         if isinstance(rtnvalue, str):
-            return render(request, 'inventory/temporary/sell.html',
-                          {'item_data': json.dumps(item_data), 'error': rtnvalue})
+            return render(
+                request, 'inventory/temporary/sell.html',
+                {'item_data': json.dumps(item_data), 'error': rtnvalue})
         else:
             return rtnvalue
 
