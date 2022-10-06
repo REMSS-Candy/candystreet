@@ -61,8 +61,8 @@ Uses the default model provided by Django.
 | id | Unique ID | int |
 | name | Name of the item | str(30) |
 | buy_price | Price when purchased to stock | int |
-| sell_price | Price when sold to customers | int |
-| quantity | Current quantity available in stock | int |
+| sell_price | Price when sold to customers | decimal |
+| quantity | Current quantity available in stock | decimal |
 
 ## Sale
 
@@ -84,7 +84,7 @@ Note: Separate Sales log must be created per item in cases where multiple items 
 | id | Unique ID | int |
 | time | Time the transaction was made | int |
 | user | User who triggered the transaction | int |
-| amount | Amount of money moved. Could be positive/negative | int |
+| amount | Amount of money moved. Could be positive/negative | decimal |
 | sale | Sale entry that triggered the transaction, if existing. Null if done manually by admin. | int |
 
 ## Revenue
@@ -93,7 +93,7 @@ Note: Separate Sales log must be created per item in cases where multiple items 
 |        ---: | :---        | :--- |
 | id | Unique ID | int |
 | date | the date the data is representing | datetime |
-| revenue | The amount of profit made in a day | int |
+| revenue | The amount of profit made in a day | decimal |
 
 ## Log
 
