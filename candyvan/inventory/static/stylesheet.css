@@ -57,7 +57,7 @@ body, html {
 }
 
 .bg-image {
-    background-image: url("https://cdn.shopify.com/s/files/1/0520/4718/4038/products/Martket_Embroider_Royal_WebImg_2_800x.jpg?v=1613163545.jpg");
+    background-image: url("/static/remss_logo.jpg");
     filter: blur(4px);
     -webkit-filter: blur(4px);
     height: 100%; 
