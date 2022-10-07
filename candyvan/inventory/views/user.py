@@ -5,8 +5,10 @@ from ..forms import LoginForm
 
 
 def login(request):
+    # TODO: Make Error Message indication box
     if request.session.get("user_id"):
         return redirect("sell")
+
     if request.method == "POST":
         form = LoginForm(request.POST)
 
@@ -17,11 +19,11 @@ def login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 request.session['user_id'] = user.id
+                return redirect("login")
     else:
         form = LoginForm()
 
-    return render(request, 'inventory/temporary/login.html',
-                  {'form': form, 'user': request.session.get("user_id")})
+    return render(request, 'inventory/login.html', {'form': form})
 
 
 def logout(request):
