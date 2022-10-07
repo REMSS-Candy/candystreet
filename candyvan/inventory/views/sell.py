@@ -70,10 +70,10 @@ def sell(request):
         rtnvalue = sell_post(request)
         if isinstance(rtnvalue, str):
             return render(
-                request, 'inventory/temporary/sell.html',
+                request, 'inventory/sell.html',
                 {'item_data': json.dumps(item_data), 'error': rtnvalue})
         else:
             return rtnvalue
 
-    return render(request, 'inventory/temporary/sell.html',
+    return render(request, 'inventory/sell.html',
                   {'item_data': json.dumps(item_data), 'error': ""})
