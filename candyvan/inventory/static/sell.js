@@ -70,7 +70,7 @@ function addItemToCart(itemName, quantity) {
     console.log("Adding " + itemName + " to cart")
     const available = itemData[itemName].available
     const price = itemData[itemName].price
-    node = cartList.querySelector("[id=cart_" + itemName + "]")
+    node = cartList.querySelector("[id=\"cart_" + itemName + "\"]")
     console.log(node)
 
     if (node === null) {
@@ -158,6 +158,7 @@ for (const name in itemData) {
         })
         addNode.addEventListener("click", function(){
             num = parseInt(target.innerText)
+            if (Math.min(num, available) > 0)
             addItemToCart(itemName, num)
             target.innerText = 1
         })
