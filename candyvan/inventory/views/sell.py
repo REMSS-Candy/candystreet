@@ -11,16 +11,18 @@ def sell_post(request):
     user = CandyUser.objects.get(id=request.session['user_id'])
     print("\n".join(f"{x}: {y}" for x, y in request.POST.items()))
     sales = {
-        Item.objects.get(name=name): int(values[0])
-        for name, values in request.POST.items()
+        Item.objects.get(name=name): int(value)
+        for name, value in request.POST.items()
         if not name.startswith("csrf")
     }
+    print(sales)
 
     profit = 0
     revenue = 0
     main_sale = None
 
-    for item, quantity in sales.items():
+    for item, quantity_str in sales.items():
+        quantity = int(quantity_str)
         if not item:
             return "Model does not exist. " \
                    "Please contact Administrator for assistance."
