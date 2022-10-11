@@ -27,7 +27,7 @@ def sell_post(request):
         if item.quantity - quantity < 0:
             return f"{item.name} has only {item.quantity} items available, " \
                    f"larger than {quantity}."
-        if quantity < 0:
+        if quantity <= 0:
             return "Quantity can't be negative! >:("
 
         item.quantity -= quantity
