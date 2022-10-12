@@ -159,7 +159,7 @@ for (const name in itemData) {
         addNode.addEventListener("click", function(){
             num = parseInt(target.innerText)
             if (Math.min(num, available) > 0)
-            addItemToCart(itemName, num)
+                addItemToCart(itemName, num)
             target.innerText = 1
         })
     })();
