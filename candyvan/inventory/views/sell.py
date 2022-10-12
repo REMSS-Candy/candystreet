@@ -6,55 +6,70 @@ import json
 import datetime
 
 
-# sales :)
+def get_today_revenue_entry():
+    try:
+        revenue_entry = Revenue.objects.get(date=datetime.date.today())
+    except Revenue.DoesNotExist:
+        revenue_entry = Revenue(revenue=0)
+
+    return revenue_entry
+
+
+def add_sale_to_revenue(item, quantity):
+    profit_per_item = item.sell_price - item.buy_price
+    revenue = quantity * profit_per_item
+
+    revenue_entry = get_today_revenue_entry()
+    revenue_entry.revenue += revenue
+    revenue_entry.save()
+
+
+def record_sale(user, item, quantity, parent=None):
+    sale = Sale(user=user, item=item, quantity=quantity)
+    if parent is not None:
+        sale.parent = parent
+
+    item.quantity -= quantity
+
+    item.save()
+    sale.save()
+
+    return sale
+
+
 def sell_post(request):
     user = CandyUser.objects.get(id=request.session['user_id'])
     print("\n".join(f"{x}: {y}" for x, y in request.POST.items()))
+
     sales = {
         Item.objects.get(name=name): int(value)
         for name, value in request.POST.items()
         if not name.startswith("csrf")
     }
-    print(sales)
 
     profit = 0
-    revenue = 0
     main_sale = None
 
-    for item, quantity_str in sales.items():
-        quantity = int(quantity_str)
+    for i, value in enumerate(sales.items()):
+        item, quantity = value
         if not item:
-            return "Model does not exist. " \
+            return f"Model {list(request.POST.keys())[i]} does not exist. " \
                    "Please contact Administrator for assistance."
-        if item.quantity - quantity < 0:
+        if item.quantity < quantity:
             return f"{item.name} has only {item.quantity} items available, " \
                    f"larger than {quantity}."
         if quantity <= 0:
-            return "Quantity can't be negative! >:("
+            return "Quantity can't be zero or negative! >:("
 
-        item.quantity -= quantity
-
-        sale = Sale(user=user, item=item, quantity=quantity)
+        sale = record_sale(user, item, quantity, main_sale)
         if main_sale is None:
             main_sale = sale
-        else:
-            sale.parent_entry = main_sale
 
-        item.save()
-        sale.save()
-
+        add_sale_to_revenue(item, quantity)
         profit += item.sell_price * quantity
-        revenue += (item.sell_price - item.buy_price) * quantity
 
     transaction = Transaction(user=user, amount=profit, sale=main_sale)
     transaction.save()
-
-    try:
-        revenue_entry = Revenue.objects.get(date=datetime.date.today())
-        revenue_entry.revenue += revenue
-    except Revenue.DoesNotExist:
-        revenue_entry = Revenue(revenue=revenue)
-    revenue_entry.save()
 
     return redirect("sell")
 
