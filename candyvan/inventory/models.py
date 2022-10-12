@@ -42,7 +42,7 @@ class Transaction(models.Model):
 
     def __str__(self):
         time_str = self.time.strftime('%Y-%m-%d %H:%M:%S')
-        return f"<Transaction ${self.amount} by {self.user.username}" \
+        return f"<Transaction ${self.amount} by {self.user.username} " \
                f"at {time_str} ({self.id})>"
 
     def __repr__(self):
