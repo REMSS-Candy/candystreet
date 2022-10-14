@@ -1,9 +1,28 @@
 from django.shortcuts import render, redirect
 
-from ..models import CandyUser, Item, Sale, Transaction, Revenue
+from ..models import CandyUser, Item, Sale, Transaction, Revenue, ItemHistory
 
 import json
 import datetime
+
+
+def update_itemhistory():
+    try:
+        history = ItemHistory.objects.get(date=datetime.date.today())
+        return
+    except Revenue.DoesNotExist:
+        pass
+
+    for item in Item.objects.all():
+        history = ItemHistory(
+            item=item,
+            buy_price=item.buy_price,
+            sell_price=item.sell_price,
+            quantity=item.quantity
+        )
+        history.save()
+
+    return
 
 
 def get_today_revenue_entry():
@@ -46,6 +65,8 @@ def sell_post(request):
         for name, value in request.POST.items()
         if not name.startswith("csrf")
     }
+
+    update_itemhistory()
 
     profit = 0
     main_sale = None

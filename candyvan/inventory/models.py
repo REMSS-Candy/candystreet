@@ -61,6 +61,22 @@ class Revenue(models.Model):
         return self.__str__()
 
 
+class ItemHistory(models.Model):
+    date = models.DateField(auto_now_add=True)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    buy_price = models.DecimalField(max_digits=10, decimal_places=2)
+    sell_price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.IntegerField(default=0)
+
+    def __str__(self):
+        date_str = self.date.isoformat()
+        return f"<ItemHistory `{self.item.name}` " \
+               f"at {date_str} ({self.id})>"
+
+    def __repr__(self):
+        return self.__str__()
+
+
 class Log(models.Model):
     time = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(CandyUser, on_delete=models.CASCADE)
