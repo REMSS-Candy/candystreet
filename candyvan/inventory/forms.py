@@ -1,11 +1,13 @@
 from django import forms
-from models import Transaction
+from .models import Transaction
+
 
 class EditTransaction(forms.ModelForm):
     
     class Meta:
         model = Transaction
-        fields = ('amount')
+        fields = ('amount',)
+
 
 class LoginForm(forms.Form):
     username = forms.CharField(label="Username", max_length=50)
