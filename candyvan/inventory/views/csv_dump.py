@@ -1,9 +1,10 @@
 from django.http import HttpResponse
 from django.utils import timezone
 from django.shortcuts import render, redirect
+from django.contrib.admin.views.decorators import staff_member_required
 
 from ..forms import CSVForm
-from ..models import CandyUser, Item, Sale, ItemHistory
+from ..models import Item, Sale, ItemHistory
 
 import io
 import csv
@@ -137,18 +138,12 @@ def csv_post(request):
         return resp
 
 
+@staff_member_required
 def csv_view(request):
-    if not request.session.get('user_id'):
-        return redirect("login")
-
-    user = CandyUser.objects.get(id=request.session['user_id'])
-
-    if not user.is_staff:
-        return redirect("sell")
-
     if request.method == "POST":
         return csv_post(request)
 
     form = CSVForm()
 
-    return render(request, "inventory/admin-csv.html", {"form": form})
+    return render(request, "inventory/admin-csv.html", {
+        "form": form, "admin": True})

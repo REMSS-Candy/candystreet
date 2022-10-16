@@ -97,6 +97,7 @@ def sell_post(request):
 def sell(request):
     if not request.session.get('user_id'):
         return redirect("login")
+    user = CandyUser.objects.get(id=request.session['user_id'])
 
     item_data = {
         x.name: {"available": x.quantity, "price": float(x.sell_price)}
@@ -108,9 +109,11 @@ def sell(request):
         if isinstance(rtnvalue, str):
             return render(
                 request, 'inventory/sell.html',
-                {'item_data': json.dumps(item_data), 'error': rtnvalue})
+                {'item_data': json.dumps(item_data), 'error': rtnvalue,
+                 'admin': user.is_staff})
         else:
             return rtnvalue
 
-    return render(request, 'inventory/sell.html',
-                  {'item_data': json.dumps(item_data), 'error': ""})
+    return render(request, 'inventory/sell.html', {
+        'item_data': json.dumps(item_data), 'error': "", 'admin': user.is_staff
+    })
