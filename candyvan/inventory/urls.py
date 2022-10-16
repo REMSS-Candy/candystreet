@@ -8,5 +8,6 @@ urlpatterns = [
          name='inventory_index_login_redir'),
     path('login/', views.user.login, name='login'),
     path('logout/', views.user.logout, name='logout'),
-    path('sell/', views.sell.sell, name='sell')
+    path('sell/', views.sell.sell, name='sell'),
+    path('admin/csv/', views.csv_dump.csv_view, name="csv")
 ]

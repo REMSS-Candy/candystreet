@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <div class="container">
+    <nav class="navbar">
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="../">
+            Home
+          </a>
+        </div>
+        <div class="navbar-end">
+          <a class="navbar-item" href="../sell">
+            Sell
+          </a>
+          <div class="navbar-item">
+            <a class="button is-danger" href="../logout">
+              Logout
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <!-- End of Navbar -->
+  <!-- Main -->
+  <section class="hero is-info is-fullheight-with-navbar">
+    <div class="hero-body">
+      <div class="container">
+        <div class="box">
+          <!--style="height: 85vh"-->
+          <p class="title has-text-black">CSV Downloads</p>
+          <hr>
+          <div class="container">
+            <form method="post">
+              {% csrf_token %}
+              <div class="field">
+                <label class="label">{{ form.date.label }}</label>
+                <div class="control">
+                  {{ form.date }}
+                </div>
+              </div>
+              <div class="field is-grouped">
+                <div class="control">
+                  <input class="button is-link" type="submit" name="submit_sales" value="Download Daily Sales CSV">
+                </div>
+                <div class="control">
+                  <input class="button is-link" type="submit" name="submit_items" value="Download Item Stat CSV">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End of Main -->
+</body>

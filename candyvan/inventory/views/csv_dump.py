@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 
-from ..models import Item, Sale, ItemHistory
+from ..forms import CSVForm
+from ..models import CandyUser, Item, Sale, ItemHistory
 
 import io
 import csv
@@ -98,3 +99,24 @@ def format_item_stat_csv(start_date):
     file.seek(0)
 
     return file.read()
+
+
+def csv_post(request):
+    pass
+
+
+def csv_view(request):
+    if not request.session.get('user_id'):
+        return redirect("login")
+
+    user = CandyUser.objects.get(id=request.session['user_id'])
+
+    if not user.is_staff:
+        return redirect("sell")
+
+    if request.method == "POST":
+        return csv_post(request)
+
+    form = CSVForm()
+
+    return render(request, "inventory/admin-csv.html", {"form": form})
