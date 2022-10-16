@@ -105,6 +105,7 @@ function addItemToCart(itemName, quantity) {
         })
         removeNode.addEventListener("click", function(){
             parentNode.remove()
+            cartUpdateTotal()
         })
 
         cartList.insertBefore(node, exampleCartNode)
