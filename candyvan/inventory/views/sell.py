@@ -56,7 +56,7 @@ def record_sale(user, item, quantity, parent=None):
 
 
 def sell_post(request):
-    user = CandyUser.objects.get(id=request.session['user_id'])
+    user = request.user
     print("\n".join(f"{x}: {y}" for x, y in request.POST.items()))
 
     sales = {
@@ -95,9 +95,9 @@ def sell_post(request):
 
 
 def sell(request):
-    if not request.session.get('user_id'):
+    if not request.user.is_authenticated:
         return redirect("login")
-    user = CandyUser.objects.get(id=request.session['user_id'])
+    user = request.user
 
     item_data = {
         x.name: {"available": x.quantity, "price": float(x.sell_price)}

@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 
 from ..forms import LoginForm
 
 
-def login(request):
+def login_view(request):
     # TODO: Make Error Message indication box
-    if request.session.get("user_id"):
+    if request.user.is_authenticated:
         return redirect("sell")
 
     if request.method == "POST":
@@ -18,7 +18,7 @@ def login(request):
 
             user = authenticate(username=username, password=password)
             if user is not None:
-                request.session['user_id'] = user.id
+                login(request, user)
                 return redirect("login")
     else:
         form = LoginForm()
@@ -26,9 +26,8 @@ def login(request):
     return render(request, 'inventory/login.html', {'form': form})
 
 
-def logout(request):
-    empty = object()
-    if request.session.get("user_id", empty) is not empty:
-        del request.session['user_id']
+def logout_view(request):
+    if request.user.is_authenticated:
+        logout(request)
 
     return redirect("login")
