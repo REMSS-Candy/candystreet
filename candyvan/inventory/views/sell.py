@@ -7,11 +7,10 @@ import datetime
 
 
 def update_itemhistory():
-    try:
-        history = ItemHistory.objects.get(date=datetime.date.today())
+    if ItemHistory.objects.filter(date=datetime.date.today()):
         return
-    except Revenue.DoesNotExist:
-        pass
+
+    print("Creating new item histories")
 
     for item in Item.objects.all():
         history = ItemHistory(
