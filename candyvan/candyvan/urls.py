@@ -16,8 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import RedirectView
+from inventory.views.csv_dump import csv_view
 
 urlpatterns = [
+    path("admin/csv/", csv_view, name="csv"),
     path("admin/", admin.site.urls, name="admin"),
     path('inventory/', include('inventory.urls'), name="inventory"),
     path('', RedirectView.as_view(url='/inventory/login', permanent=False),
