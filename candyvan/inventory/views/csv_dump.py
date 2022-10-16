@@ -1,3 +1,5 @@
+from django.http import HttpResponse
+from django.utils import timezone
 from django.shortcuts import render, redirect
 
 from ..forms import CSVForm
@@ -102,7 +104,37 @@ def format_item_stat_csv(start_date):
 
 
 def csv_post(request):
-    pass
+    form = CSVForm(request.POST)
+    if not form.is_valid():
+        return redirect("csv")
+
+    date = form.cleaned_data['date']
+
+    today = timezone.now().date().isoformat()
+    filename = f"{date.isoformat()}_{today}.csv"
+
+    if "submit_sales" in request.POST:
+        filename = f"sales_{filename}"
+        data = format_sales_csv(date)
+
+        return HttpResponse(data, headers={
+            'Content-Type': 'text/csv',
+            'Content-Disposition': f'attachment; filename="{filename}"'
+        })
+
+    elif "submit_items" in request.POST:
+        filename = f"items_{filename}"
+        data = format_item_stat_csv(date)
+
+        return HttpResponse(data, headers={
+            'Content-Type': 'text/csv',
+            'Content-Disposition': f'attachment; filename="{filename}"'
+        })
+
+    else:
+        resp = HttpResponse("whar happne???")
+        resp.status_code = 400
+        return resp
 
 
 def csv_view(request):
